@@ -60,7 +60,7 @@ const askQuestion = (query) => {
  *-------------------*/
 
 const setUserAgent = (uA) => {
-	if (!uA || uA === '' || /^splatnet2-cookie-node\/[0-9\.]+(.*)$/.test(uA)) {
+	if (!uA || uA === '' || /^splatnet2-cookie-node\/[0-9.]+(.*)$/.test(uA)) {
 		throw {
 			message: 'Invalid User-Agent',
 			original: uA
@@ -491,8 +491,8 @@ const getHashFromS2sApi = async (idToken, timestamp) => {
 
 (async () => {
 	
-	// Check the process.argv array exists
-	if (!process || !process.argv || !process.argv[0] || !process.argv[1]) { return 0; }
+	// Check if the script was called directly and hasn't been imported using require()
+	if (require.main !== module || !process || !process.argv || !process.argv[0] || !process.argv[1]) { return 0; }
 
 	try {
 
