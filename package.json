@@ -1,0 +1,19 @@
+{
+	"name": "splatnet2-cookie-node",
+	"version": "0.1",
+	"description": "A package for obtaining the iksm_session cookie for use with Splatnet2",
+	"main": "iksm.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"author": "Tomika Arome",
+	"license": "ISC",
+	"dependencies": {
+		"node-fetch": "^2.6.0",
+ 		"uuid": "^8.3.0"
+ 	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/tomikaarome/splatnet2-cookie-node.git"
+	}
+}
