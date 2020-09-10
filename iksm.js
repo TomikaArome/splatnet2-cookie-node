@@ -12,7 +12,7 @@ const uuidv4 = require('uuid').v4;
  | Constants |
  *-----------*/
 
-const version = 1.0;
+const version = "1.0.0";
 const clientId = '71b963c1b7b6d119';
 const availableLanguages = ['en-US', 'es-MX', 'fr-CA', 'ja-JP', 'en-GB', 'es-ES', 'fr-FR', 'de-DE', 'it-IT', 'nl-NL', 'ru-RU'];
 
