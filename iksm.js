@@ -12,7 +12,7 @@ const uuidv4 = require('uuid').v4;
  | Constants |
  *-----------*/
 
-const version = "1.0.0";
+const version = "1.0.1";
 const clientId = '71b963c1b7b6d119';
 const availableLanguages = ['en-US', 'es-MX', 'fr-CA', 'ja-JP', 'en-GB', 'es-ES', 'fr-FR', 'de-DE', 'it-IT', 'nl-NL', 'ru-RU'];
 
@@ -171,7 +171,7 @@ const getSessionToken = async (sessionTokenCode, authCodeVerifier) => {
 const getCookie = async (userLang, sessionToken) => {
 
 	let guid = uuidv4();
-	let timestamp = +new Date();
+	let timestamp = Math.floor(+new Date() / 1000);
 
 	// ---- STEP 2 ----
 	// Get id_token from Nintendo
@@ -438,16 +438,29 @@ const getFromFlapgApi = async (idToken, guid, timestamp, type) => {
 	};
 	const url = 'https://flapg.com/ika2/api/login?public';
 
-	let res = await fetch(url, {
+	let [err, res] = await to(fetch(url, {
 		method: 'GET',
 		headers: head
-	});
-	let json = await res.json();
+	}));
+	if (err || !res.ok) {
+		throw {
+			message: 'A request when attempting to access the flapg API failed',
+			original: err || res.status
+		};
+	}
+	let [jsonErr, json] = await to(res.json());
+	if (jsonErr) {
+		throw {
+			message: 'The JSON retrieved from a flapg request could not be parsed',
+			original: jsonErr
+		};
+	}
 
 	if (typeof json.result === 'undefined') {
-		console.error('Couldn\'t get the f token from the flapg API');
-		console.error(json);
-		return false;
+		throw {
+			message: 'Couldn\'t get the f token from the flapg API',
+			original: json
+		};
 	}
 	return json.result;
 };
@@ -470,17 +483,30 @@ const getHashFromS2sApi = async (idToken, timestamp) => {
 	};
 	const url = 'https://elifessler.com/s2s/api/gen2';
 
-	let res = await fetch(url, {
+	let [err, res] = await to(fetch(url, {
 		method: 'POST',
 		headers: head,
 		body: buildQuery(params)
-	});
-	let json = await res.json();
+	}));
+	if (err || !res.ok) {
+		throw {
+			message: 'A request when attempting to access the s2s API failed',
+			original: err || res.status
+		};
+	}
+	let [jsonErr, json] = await to(res.json());
+	if (jsonErr) {
+		throw {
+			message: 'The JSON retrieved from a flapg request could not be parsed',
+			original: jsonErr
+		};
+	}
 
 	if (typeof json.hash === 'undefined') {
-		console.error('Couldn\'t get the hash from the s2s API');
-		console.error(json);
-		return false;
+		throw {
+			message: 'Couldn\'t get the hash from the s2s API',
+			original: json
+		};
 	}
 	return json.hash;
 };

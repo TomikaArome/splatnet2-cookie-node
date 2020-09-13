@@ -1,6 +1,6 @@
 {
 	"name": "splatnet2-cookie-node",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"description": "A package for obtaining the iksm_session cookie for use with Splatnet2",
 	"main": "iksm.js",
 	"scripts": {
