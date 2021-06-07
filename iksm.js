@@ -12,7 +12,7 @@ const uuidv4 = require('uuid').v4;
  | Constants |
  *-----------*/
 
-const version = "1.0.2";
+const version = "1.0.3";
 const clientId = '71b963c1b7b6d119';
 const availableLanguages = ['en-US', 'es-MX', 'fr-CA', 'ja-JP', 'en-GB', 'es-ES', 'fr-FR', 'de-DE', 'it-IT', 'nl-NL', 'ru-RU'];
 
@@ -124,7 +124,7 @@ const getSessionToken = async (sessionTokenCode, authCodeVerifier) => {
 
 	const step1Url = 'https://accounts.nintendo.com/connect/1.0.0/api/session_token';
 	let step1Head = {
-		'User-Agent':		'OnlineLounge/1.9.0 NASDKAPI Android',
+		'User-Agent':		'OnlineLounge/1.11.0 NASDKAPI Android',
 		'Accept-Language':	'en-US',
 		'Accept':			'application/json',
 		'Content-Type':		'application/x-www-form-urlencoded',
@@ -184,7 +184,7 @@ const getCookie = async (userLang, sessionToken) => {
 		'Content-Length':	'439',
 		'Accept':			'application/json',
 		'Connection':		'Keep-Alive',
-		'User-Agent':		'OnlineLounge/1.9.0 NASDKAPI Android'
+		'User-Agent':		'OnlineLounge/1.11.0 NASDKAPI Android'
 	};
 	let step2Params = {
 		'client_id':		'71b963c1b7b6d119',
@@ -231,7 +231,7 @@ const getCookie = async (userLang, sessionToken) => {
 	// Get user info
 
 	let step3Head = {
-		'User-Agent':		'OnlineLounge/1.9.0 NASDKAPI Android',
+		'User-Agent':		'OnlineLounge/1.11.0 NASDKAPI Android',
 		'Accept-Language':	userLang,
 		'Accept':			'application/json',
 		'Authorization':	`Bearer ${step2Json.access_token}`,
@@ -273,9 +273,9 @@ const getCookie = async (userLang, sessionToken) => {
 	let step4Head = {
 		'Host':				'api-lp1.znc.srv.nintendo.net',
 		'Accept-Language':	userLang,
-		'User-Agent':		'com.nintendo.znca/1.9.0 (Android/7.1.2)',
+		'User-Agent':		'com.nintendo.znca/1.11.0 (Android/7.1.2)',
 		'Accept':			'application/json',
-		'X-ProductVersion':	'1.9.0',
+		'X-ProductVersion':	'1.11.0',
 		'Content-Type':		'application/json; charset=utf-8',
 		'Connection':		'Keep-Alive',
 		'Authorization':	'Bearer',
@@ -336,9 +336,9 @@ const getCookie = async (userLang, sessionToken) => {
 
 	let step5Head = {
 		'Host':				'api-lp1.znc.srv.nintendo.net',
-		'User-Agent':		'com.nintendo.znca/1.9.0 (Android/7.1.2)',
+		'User-Agent':		'com.nintendo.znca/1.11.0 (Android/7.1.2)',
 		'Accept':			'application/json',
-		'X-ProductVersion':	'1.9.0',
+		'X-ProductVersion':	'1.11.0',
 		'Content-Type':		'application/json; charset=utf-8',
 		'Connection':		'Keep-Alive',
 		'Authorization':	`Bearer ${step4AccessToken}`,
